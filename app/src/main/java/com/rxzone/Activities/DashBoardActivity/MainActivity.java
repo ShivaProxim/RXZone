@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.rxzone.Activities.DashBoardActivity.Fragments.AllPostFragment;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private TabLayout tabLayout;
     private MyTabAdapter myTabAdapter;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,16 @@ public class MainActivity extends AppCompatActivity
         initializeViews(MainActivity.this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+//        searchView = (SearchView)toolbar.findViewById(R.id.search);
+
+//
+//        searchView.setActivated(true);
+//        searchView.setQueryHint("Type your keyword here");
+//        searchView.onActionViewExpanded();
+//        searchView.setIconified(false);
+//        searchView.clearFocus();
 
 
 
@@ -74,6 +85,8 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(new AllPostFragment(), "Top MFR");
         adapter.addFragment(new AllPostFragment(), "Top Buyers");
 //        adapter.addFragment(new AllPostFragment(), "Top Sale");
+
+        mViewPager.setOffscreenPageLimit(3);
 
         mViewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(mViewPager);

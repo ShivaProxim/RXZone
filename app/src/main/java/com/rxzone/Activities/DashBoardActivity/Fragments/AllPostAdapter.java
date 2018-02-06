@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.rxzone.Util.DateUtil;
 import com.rxzone.rxzone.R;
 
@@ -47,6 +48,7 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.ViewHold
     @Override
     public void onBindViewHolder(AllPostAdapter.ViewHolder holder, int position) {
 //            holder.notification_item_img.setImageResource(R.drawable.shades);
+         Glide.with(context).load(allPostData.get(position).getPackageName()).into(holder.postimg);
         if (allPostData.get(position).getPackageName() != null && !allPostData.get(position).getPackageName().isEmpty()) {
             holder.postTitle.setText(Html.fromHtml(allPostData.get(position).getPackageName() + ""));
         }
@@ -66,13 +68,13 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        ImageView notification_item_img, likeIv, decrementIv, addIv;
+        ImageView postimg, likeIv, decrementIv, addIv;
         TextView postTitle, postinfo, postdate, counttxt;
         Button addbtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            notification_item_img = (ImageView) itemView.findViewById(R.id.postimg);
+            postimg = (ImageView) itemView.findViewById(R.id.postimg);
             postTitle = (TextView) itemView.findViewById(R.id.postTitle);
             postinfo = (TextView) itemView.findViewById(R.id.postinfo);
             postdate = (TextView) itemView.findViewById(R.id.postdate);

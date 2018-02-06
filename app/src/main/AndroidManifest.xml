@@ -24,7 +24,7 @@
 
         <activity
             android:name="com.rxzone.Activities.DashBoardActivity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/MyMaterialTheme.Base"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.rxzone.Activities.LoginActivity.LoginActivity"
