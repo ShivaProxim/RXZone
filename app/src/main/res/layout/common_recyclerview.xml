@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_common_recycler_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/common_recyclerview_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+
+        android:focusableInTouchMode="true"
+        android:nestedScrollingEnabled="false" />
+
+    <TextView
+        android:id="@+id/nodataavailtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="No Data"
+
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <com.leo.simplearcloader.SimpleArcLoader
+        android:id="@+id/arc_loader"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        custom:arc_colors="@color/colorAccent"
+        custom:arc_margin="3dp"
+        custom:arc_speed="medium"
+        custom:arc_style="simple_arc"
+        custom:arc_thickness="3dp"></com.leo.simplearcloader.SimpleArcLoader>
+</RelativeLayout>
