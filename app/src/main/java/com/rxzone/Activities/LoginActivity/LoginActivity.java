@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.leo.simplearcloader.ArcConfiguration;
 import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
+import com.rxzone.Activities.DashBoardActivity.HomeActivity;
 import com.rxzone.Activities.DashBoardActivity.MainActivity;
 import com.rxzone.Activities.ForgotPasswordActivity.ForgotPasswordActivity;
 import com.rxzone.retrofitcall.ApiClient;
@@ -126,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String message = response.body().getMessage();
                     if (message != null && message.equals("success")) {
                         Toast.makeText(getApplicationContext(), "Successfully Login", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(i);
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid Login Details", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.rxzone.Activities.DashBoardActivity.Fragments;
+package com.rxzone.Activities.Fragments.AllPostFragment;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,4 @@
-package com.rxzone.Activities.DashBoardActivity.Fragments;
+package com.rxzone.Activities.Fragments.AllPostFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.rxzone.Util.DateUtil;
 import com.rxzone.rxzone.R;
 

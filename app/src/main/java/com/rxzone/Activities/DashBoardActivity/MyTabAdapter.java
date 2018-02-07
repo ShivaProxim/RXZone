@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.rxzone.Activities.DashBoardActivity.Fragments.AllPostFragment;
+import com.rxzone.Activities.Fragments.AllPostFragment.AllPostFragment;
 
 /**
  * Created by PROXIM on 2/5/2018.

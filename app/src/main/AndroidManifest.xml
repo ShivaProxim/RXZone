@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name="com.rxzone.Activities.DashBoardActivity.MainActivity"
+            android:name="com.rxzone.Activities.DashBoardActivity.HomeActivity"
             android:theme="@style/MyMaterialTheme.BaseWhite"
             android:windowSoftInputMode="stateHidden" />
         <activity

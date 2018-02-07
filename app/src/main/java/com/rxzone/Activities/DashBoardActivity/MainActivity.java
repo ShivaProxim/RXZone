@@ -3,14 +3,11 @@ package com.rxzone.Activities.DashBoardActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,8 +20,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.rxzone.Activities.AddPostActivity.AddPostActivity;
-import com.rxzone.Activities.DashBoardActivity.Fragments.AllPostFragment;
-import com.rxzone.Activities.ForgotPasswordActivity.ForgotPasswordActivity;
+import com.rxzone.Activities.Fragments.AllPostFragment.AllPostFragment;
 import com.rxzone.rxzone.R;
 
 import java.util.ArrayList;
@@ -73,12 +69,6 @@ public class MainActivity extends AppCompatActivity
         mViewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-       /* tabLayout.addTab(tabLayout.newTab().setText("All Post"));
-        tabLayout.addTab(tabLayout.newTab().setText("Top Post"));
-        tabLayout.addTab(tabLayout.newTab().setText("Top Sale"));
-        tabLayout.addTab(tabLayout.newTab().setText("Top MFR"));
-        tabLayout.addTab(tabLayout.newTab().setText("Top Buyers"));
-*/
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         // Add Fragments to adapter one by one
         adapter.addFragment(new AllPostFragment(), "All Post");
@@ -86,7 +76,6 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(new AllPostFragment(), "Top Sale");
         adapter.addFragment(new AllPostFragment(), "Top MFR");
         adapter.addFragment(new AllPostFragment(), "Top Buyers");
-//        adapter.addFragment(new AllPostFragment(), "Top Sale");
 
         mViewPager.setOffscreenPageLimit(3);
 

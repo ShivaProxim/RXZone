@@ -1,10 +1,9 @@
-package com.rxzone.Activities.DashBoardActivity.Fragments;
+package com.rxzone.Activities.Fragments.AddPostFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.leo.simplearcloader.SimpleArcLoader;
+import com.rxzone.Activities.Fragments.AllPostFragment.AllPostAdapter;
+import com.rxzone.Activities.Fragments.AllPostFragment.AllPostData;
 import com.rxzone.retrofitcall.ApiClient;
 import com.rxzone.retrofitcall.ApiInterface;
 import com.rxzone.rxzone.R;
@@ -25,12 +26,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 /**
- * Created by abhishek on 21-10-2017.
+ * Created by PROXIM on 2/7/2018.
  */
 
-public class AllPostFragment extends Fragment {
+public class AddPostFragment extends Fragment {
     View view;
     RecyclerView common_recyclerview_recycler;
     FragmentManager fragmentManager;
@@ -44,10 +44,10 @@ public class AllPostFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.common_recyclerview, container, false);
+        view = inflater.inflate(R.layout.add_post_activity, container, false);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        initializeViews();
-        retrofitInit();
+//        initializeViews();
+//        retrofitInit();
         return view;
     }
 
@@ -100,6 +100,5 @@ public class AllPostFragment extends Fragment {
         allPostAdapter = new AllPostAdapter(getContext(), fragmentManager, allPostdata);
         common_recyclerview_recycler.setAdapter(allPostAdapter);
     }
-
 
 }
