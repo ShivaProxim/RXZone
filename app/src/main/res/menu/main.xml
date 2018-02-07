@@ -5,12 +5,12 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        android:icon="@drawable/ic_likepink"
+        android:icon="@drawable/ic_like_pink_small"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_settingsss"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        android:icon="@drawable/ic_shoppingcart"
+        android:icon="@drawable/ic_cart_small"
         app:showAsAction="always" />
 </menu>

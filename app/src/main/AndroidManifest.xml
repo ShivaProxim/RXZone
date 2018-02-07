@@ -24,7 +24,7 @@
 
         <activity
             android:name="com.rxzone.Activities.DashBoardActivity.MainActivity"
-            android:theme="@style/MyMaterialTheme.Base"
+            android:theme="@style/MyMaterialTheme.BaseWhite"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.rxzone.Activities.LoginActivity.LoginActivity"
@@ -33,6 +33,9 @@
 
         <activity
             android:name="com.rxzone.Activities.ForgotPasswordActivity.ForgotPasswordActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.rxzone.Activities.AddPostActivity.AddPostActivity"
             android:windowSoftInputMode="stateHidden" />
 
     </application>

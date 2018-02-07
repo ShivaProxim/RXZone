@@ -18,6 +18,31 @@
 
     <string name="submit">Submit</string>
 
-    <string name="product_name">Zyprexa InstaMuscular 10mg Powder for Injection</string>
+    <string name="product_name">#Name : N/A</string>
+
+    <string name="product_dosage">#Dosage : N/A</string>
+    <string name="product_exp">#Exp Date (Days) : N/A</string>
+
+    <string name="ndcnumber">NDC Number</string>
+    <string name="lotnumber">Lot Number</string>
+
+    <string name="expiration">Expiration Date</string>
+    <string name="packquaty">Pack Quantity</string>
+
+    <string name="packageavail">Packages Available</string>
+    <string name="priceopt">Price Option</string>
+    <string name="wacprice">WAC Price</string>
+    <string name="wacdiscount">WAC Discount</string>
+    <string name="pacprice">Pack Price</string>
+    <string name="packagecon">Package Condition</string>
+    <string name="doyouwant">Do you want to pay for ground shipping?</string>
+    <string name="selectshipping">Select Shipping method?</string>
+
+    <string name="reset">Reset</string>
+    <string name="submittitle">Submit</string>
+
+    <string name="mfdfixed">MFR : Fixed</string>
+    <string name="price">Price : 180</string>
+
 
 </resources>

@@ -47,19 +47,45 @@
                     android:id="@+id/postinfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:maxLines="1"
                     android:layout_marginTop="@dimen/two"
-                    android:text="@string/product_dosage" />
+                    android:maxLines="1"
+                    android:text="@string/product_dosage"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/postdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textSize="12sp"
                     android:layout_marginTop="@dimen/two"
-                    android:text="@string/product_exp" />
+                    android:maxLines="1"
+                    android:text="@string/product_exp"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/two"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/mfdtxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="@dimen/two"
+                        android:maxLines="1"
+                        android:text="@string/mfdfixed"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/pricetxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/two"
+                        android:maxLines="1"
+                        android:text="@string/price"
+                        android:textSize="12sp" />
+                </RelativeLayout>
 
 
             </LinearLayout>
@@ -71,9 +97,9 @@
 
 
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="right"
+                android:layout_marginLeft="30dp"
                 android:gravity="center">
 
                 <include layout="@layout/card_bottom_cart" />

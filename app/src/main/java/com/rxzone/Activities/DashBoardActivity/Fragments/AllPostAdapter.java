@@ -48,13 +48,13 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.ViewHold
     @Override
     public void onBindViewHolder(AllPostAdapter.ViewHolder holder, int position) {
 //            holder.notification_item_img.setImageResource(R.drawable.shades);
-         Glide.with(context).load(allPostData.get(position).getPackageName()).into(holder.postimg);
+//         Glide.with(context).load(allPostData.get(position).getPackageName()).into(holder.postimg);
         if (allPostData.get(position).getPackageName() != null && !allPostData.get(position).getPackageName().isEmpty()) {
             holder.postTitle.setText(Html.fromHtml(allPostData.get(position).getPackageName() + ""));
         }
 
         if (allPostData.get(position).getPackagee() != null && !allPostData.get(position).getPackagee().isEmpty()) {
-            holder.postinfo.setText("Dosage :"+ Html.fromHtml(allPostData.get(position).getPackagee() + ""));
+            holder.postinfo.setText("Dosage : "+ Html.fromHtml(allPostData.get(position).getPackagee() + ""));
         }
         if (allPostData.get(position).getExpDate() != null && !allPostData.get(position).getExpDate().isEmpty()) {
             holder.postdate.setText("Exp Date(Days) : "+ DateUtil.serverSentDateChange(Html.fromHtml(allPostData.get(position).getExpDate())+ ""));

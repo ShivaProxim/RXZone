@@ -1,6 +1,7 @@
 package com.rxzone.Activities.DashBoardActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.rxzone.Activities.AddPostActivity.AddPostActivity;
 import com.rxzone.Activities.DashBoardActivity.Fragments.AllPostFragment;
 import com.rxzone.Activities.ForgotPasswordActivity.ForgotPasswordActivity;
 import com.rxzone.rxzone.R;
@@ -135,7 +137,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.addpost) {
+            Intent i = new Intent(MainActivity.this, AddPostActivity.class);
+            startActivity(i);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 

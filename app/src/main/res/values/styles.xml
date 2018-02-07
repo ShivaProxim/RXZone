@@ -28,6 +28,16 @@
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
+    <style name="MyMaterialTheme.BaseWhite" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="actionBarStyle">@style/ActionBarStyle</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
     <style name="ActionBarStyle" parent="Theme.AppCompat.Light.DarkActionBar" >
         <item name="android:titleTextStyle">@style/ActionBarTitle</item>
     </style>

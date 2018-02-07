@@ -43,16 +43,18 @@
 
                 android:background="@drawable/ic_minus_small"
                 android:gravity="center"
-                android:text="Hello World!" />
+                />
 
             <TextView
                 android:id="@+id/counttxt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:layout_toRightOf="@+id/decrementIv"
-                android:paddingLeft="@dimen/eigth"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/five"
+                android:textSize="@dimen/ten"
+
                 android:paddingRight="@dimen/eigth"
                 android:text="10" />
 
@@ -61,18 +63,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginRight="@dimen/ten"
-                android:layout_toRightOf="@+id/counttxt"
                 android:background="@drawable/ic_plus_small"
-                android:gravity="center"
                 android:text="Hello World!" />
         </LinearLayout>
 
         <Button
             android:id="@+id/addbtn"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginLeft="@dimen/ten"
+            android:layout_height="20dp"
+            android:layout_marginLeft="@dimen/twenty"
             android:layout_toRightOf="@+id/checklayout"
             android:background="@drawable/rounded_corner"
             android:drawableLeft="@drawable/ic_add_small"
