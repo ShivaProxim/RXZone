@@ -34,7 +34,7 @@
             android:minHeight="?attr/actionBarSize">
 
             <EditText
-                android:id="@+id/text_view"
+                android:id="@+id/toolbarsearch"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -46,13 +46,25 @@
                 android:cursorVisible="false"
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/fifteen"
+                android:visibility="gone"
                 android:background="@drawable/rounded_corner_grey"
                 android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/toolbarcusttext"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="@dimen/five"
+                android:text="Rxzone"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="@dimen/fifteen"
+                android:textColor="@color/black"
+                />
            <!-- <android.support.v7.widget.SearchView
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:clickable="true" />-->
 
         </android.support.v7.widget.Toolbar>
@@ -80,6 +92,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
+            app:itemTextColor="@drawable/drawericoncolorchange"
             app:menu="@menu/activity_main_drawer"/>
 
     </android.support.v4.widget.DrawerLayout>

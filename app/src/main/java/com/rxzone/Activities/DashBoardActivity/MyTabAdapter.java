@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostFragment;
+import com.rxzone.Activities.Fragments.AllPostFragment.AllPostListFragment;
 
 /**
  * Created by PROXIM on 2/5/2018.
@@ -28,13 +28,13 @@ public class MyTabAdapter extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                AllPostFragment tab1 = new AllPostFragment();
+                AllPostListFragment tab1 = new AllPostListFragment();
                 return tab1;
             case 1:
-                AllPostFragment tab2 = new AllPostFragment();
+                AllPostListFragment tab2 = new AllPostListFragment();
                 return tab2;
             case 2:
-                AllPostFragment tab3 = new AllPostFragment();
+                AllPostListFragment tab3 = new AllPostListFragment();
                 return tab3;
             default:
                 return null;

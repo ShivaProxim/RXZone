@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.rxzone.Activities.DashBoardActivity.HomeActivity;
 import com.rxzone.Activities.LoginActivity.LoginActivity;
+import com.rxzone.Util.SharedPrefsUtil;
 import com.rxzone.rxzone.R;
 
 
@@ -22,8 +24,15 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreen.this,LoginActivity.class);
-                startActivity(i);
+                String TokenId = SharedPrefsUtil.getStringPreference(getApplicationContext(), "TOKEN_ID");
+                if (TokenId != null && !TokenId.isEmpty()) {
+                    Intent i = new Intent(SplashScreen.this, HomeActivity.class);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(SplashScreen.this, LoginActivity.class);
+                    startActivity(i);
+                }
+
 //                startActivity(new Intent(SplashScreen.this, LoginActivity.class));
 //                finish();
             }

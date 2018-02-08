@@ -1,4 +1,4 @@
-package com.rxzone.Activities.Fragments.AddPostFragment;
+package com.rxzone.Activities.Fragments.AllPostFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,9 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,26 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leo.simplearcloader.SimpleArcLoader;
-import com.rxzone.Activities.DashBoardActivity.MainActivity;
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostAdapter;
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostData;
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostFragment;
-import com.rxzone.retrofitcall.ApiClient;
 import com.rxzone.retrofitcall.ApiInterface;
 import com.rxzone.rxzone.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 /**
  * Created by PROXIM on 2/7/2018.
  */
 
-public class AllPostMainFragment  extends Fragment implements  TabLayout.OnTabSelectedListener{
+public class AllPostLandingFragment extends Fragment implements TabLayout.OnTabSelectedListener {
     View view;
     RecyclerView common_recyclerview_recycler;
     FragmentManager fragmentManager;
@@ -60,18 +49,17 @@ public class AllPostMainFragment  extends Fragment implements  TabLayout.OnTabSe
     }
 
 
-
     private void initializeViews() {
-        mViewPager = (ViewPager)  view.findViewById(R.id.pager);
-        tabLayout = (TabLayout)  view.findViewById(R.id.tabs);
+        mViewPager = (ViewPager) view.findViewById(R.id.pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         // Add Fragments to adapter one by one
-        adapter.addFragment(new AllPostFragment(), "All Post");
-        adapter.addFragment(new AllPostFragment(), "Top Post");
-        adapter.addFragment(new AllPostFragment(), "Top Sale");
-        adapter.addFragment(new AllPostFragment(), "Top MFR");
-        adapter.addFragment(new AllPostFragment(), "Top Buyers");
+        adapter.addFragment(new AllPostListFragment(), "All Post");
+        adapter.addFragment(new AllPostListFragment(), "Top Post");
+        adapter.addFragment(new AllPostListFragment(), "Top Sale");
+        adapter.addFragment(new AllPostListFragment(), "Top MFR");
+        adapter.addFragment(new AllPostListFragment(), "Top Buyers");
 
         mViewPager.setOffscreenPageLimit(3);
 
@@ -82,6 +70,25 @@ public class AllPostMainFragment  extends Fragment implements  TabLayout.OnTabSe
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.grey), getResources().getColor(R.color.colorAccent1));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent1));
+
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));//);
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override

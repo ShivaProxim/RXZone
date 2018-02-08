@@ -20,8 +20,8 @@ import com.leo.simplearcloader.ArcConfiguration;
 import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
 import com.rxzone.Activities.DashBoardActivity.HomeActivity;
-import com.rxzone.Activities.DashBoardActivity.MainActivity;
 import com.rxzone.Activities.ForgotPasswordActivity.ForgotPasswordActivity;
+import com.rxzone.Util.SharedPrefsUtil;
 import com.rxzone.retrofitcall.ApiClient;
 import com.rxzone.retrofitcall.ApiInterface;
 import com.rxzone.rxzone.R;
@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initializeFunction() {
+        username_et.setText("user@rxzone.com");
+        password_et.setText("test@123#");
         loginBtn.setOnClickListener(this);
         forgotbtn.setOnClickListener(this);
     }
@@ -111,8 +113,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void retrofitInit() {
-        userName = "user@rxzone.com";
-        passWord = "test@123#";
         LoginData loginData = new LoginData(userName, passWord);
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
@@ -127,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String message = response.body().getMessage();
                     if (message != null && message.equals("success")) {
                         Toast.makeText(getApplicationContext(), "Successfully Login", Toast.LENGTH_SHORT).show();
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "TOKEN_ID", response.body().getToken());
                         Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(i);
                     } else {

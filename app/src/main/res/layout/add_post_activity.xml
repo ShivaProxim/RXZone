@@ -6,28 +6,12 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/addbtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/ten"
-        android:background="@drawable/circleshape"
-        android:drawableTint="@color/grey"
-        android:drawableTop="@drawable/ic_plus"
-        android:gravity="center"
-        android:padding="15dp"
-        android:text="Add More Images"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/thirteen"
-        android:visibility="visible" />
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_above="@+id/bottomview"
         android:layout_marginBottom="@dimen/five"
-        android:layout_below="@+id/addbtn"
         android:layout_marginLeft="@dimen/five"
         android:layout_marginRight="@dimen/five"
         android:layout_height="match_parent"
@@ -37,6 +21,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/addbtn"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="@dimen/fifteen"
+                android:background="@drawable/circleshape"
+                android:drawableTint="@color/grey"
+                android:drawableTop="@drawable/ic_plus"
+
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="12dp"
+                android:text="Add More Images"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/ten"
+                android:visibility="visible" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,7 +82,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five"
+                android:layout_marginTop="@dimen/ten"
                 android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
@@ -92,6 +93,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
                         android:hint="@string/expiration" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -100,13 +102,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/five"
+                    android:layout_marginLeft="@dimen/ten"
+
                     android:layout_weight="1">
 
                     <TextView
                         android:id="@+id/packquatytxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/thirteen"
                         android:layout_alignParentTop="true"
                         android:text="@string/packquaty" />
 
@@ -116,7 +120,13 @@
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@id/packquatytxt"
                         android:layout_below="@id/packquatytxt"
+
                         android:drawSelectorOnTop="true" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:background="@color/black"
+                        android:layout_below="@id/packquatyspn"
+                        android:layout_height="0.8dp"/>
                 </RelativeLayout>
 
             </LinearLayout>
@@ -124,7 +134,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five"
+                android:layout_marginTop="@dimen/ten"
                 android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
@@ -138,6 +148,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/packageavail"
                         android:imeOptions="actionNext"
+
                         android:maxLines="1"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
@@ -147,7 +158,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/five"
+                    android:layout_marginLeft="@dimen/ten"
                     android:layout_weight="1">
 
                     <TextView
@@ -155,15 +166,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
+                        android:textSize="@dimen/thirteen"
                         android:text="@string/priceopt" />
 
                     <Spinner
                         android:id="@+id/spinner_days"
                         android:layout_width="fill_parent"
+                        android:paddingTop="@dimen/five"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@id/priceopttxt"
                         android:layout_below="@id/priceopttxt"
                         android:drawSelectorOnTop="true" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:background="@color/black"
+                        android:layout_below="@id/spinner_days"
+                        android:layout_height="0.8dp"/>
                 </RelativeLayout>
 
                 <!--<Spinner
@@ -179,7 +197,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five"
+                android:layout_marginTop="@dimen/ten"
                 android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
@@ -190,6 +208,8 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:hint="@string/wacprice" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -197,13 +217,13 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/five"
+                    android:layout_marginLeft="@dimen/ten"
                     android:layout_weight="1">
 
                     <EditText
                         android:layout_width="match_parent"
-                        android:maxLines="1"
                         android:imeOptions="actionNext"
+                        android:maxLines="1"
                         android:singleLine="true"
                         android:layout_height="wrap_content"
                         android:hint="@string/wacdiscount" />
@@ -214,7 +234,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five"
+                android:layout_marginTop="@dimen/ten"
                 android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
@@ -236,7 +256,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/five"
+                    android:layout_marginLeft="@dimen/ten"
                     android:layout_weight="1">
 
                     <TextView
@@ -244,6 +264,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
+                        android:textSize="@dimen/thirteen"
                         android:text="@string/packagecon" />
 
                     <Spinner
@@ -253,6 +274,11 @@
                         android:layout_alignBaseline="@id/packConttxt"
                         android:layout_below="@id/packConttxt"
                         android:drawSelectorOnTop="true" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:background="@color/black"
+                        android:layout_below="@id/packConspn"
+                        android:layout_height="0.8dp"/>
                 </RelativeLayout>
 
             </LinearLayout>
@@ -261,13 +287,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="@dimen/five"
+                android:layout_marginTop="@dimen/ten"
                 android:orientation="vertical"
                 >
 
                 <TextView
                     android:id="@+id/doyouwanttxt"
                     android:layout_width="wrap_content"
+                    android:textSize="@dimen/thirteen"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/doyouwant" />
@@ -280,13 +307,18 @@
                     android:layout_alignBaseline="@id/doyouwanttxt"
                     android:layout_below="@id/doyouwanttxt"
                     android:drawSelectorOnTop="true" />
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/black"
+                    android:layout_below="@id/doyouwantspn"
+                    android:layout_height="0.8dp"/>
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/five"
+                android:layout_marginBottom="@dimen/ten"
                 android:layout_marginTop="@dimen/five"
                 android:layout_weight="1">
 
@@ -294,6 +326,7 @@
                     android:id="@+id/selecttxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/thirteen"
                     android:layout_alignParentTop="true"
                     android:text="@string/selectshipping" />
 
@@ -304,6 +337,11 @@
                     android:layout_alignBaseline="@id/selecttxt"
                     android:layout_below="@id/selecttxt"
                     android:drawSelectorOnTop="true" />
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/black"
+                    android:layout_below="@id/shippingspn"
+                    android:layout_height="0.8dp"/>
             </RelativeLayout>
 
 
