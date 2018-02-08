@@ -25,6 +25,13 @@ public class ApiClient {
 
     public static final String GET_ALL_POSTS_URL = BASE_URL + "getAllPostMethod/";
 
+
+    public static final String SHIPING_METHOD_DROP_DATA_URL = BASE_URL + "getShippingMethod/";
+    public static final String PACKAGE_CON_DROP_DATA_URL = BASE_URL + "getPackageConditions/";
+    public static final String GROUND_SHIPPING_DROP_DATA_URL = BASE_URL + "getGroundShipping/";
+
+    //
+
 //    public static final String ELASTIC_URL = "http://apiservice-ec.flikster.com/";
 
 

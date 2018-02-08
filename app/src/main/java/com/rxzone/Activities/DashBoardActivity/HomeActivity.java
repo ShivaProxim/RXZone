@@ -165,6 +165,7 @@ public class HomeActivity extends AppCompatActivity {
                         SharedPrefsUtil.setStringPreference(getApplicationContext(), "TOKEN_ID", "");
                         startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                         return true;
+
                     default:
                         navItemIndex = 0;
                 }

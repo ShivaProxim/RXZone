@@ -2,6 +2,7 @@ package com.rxzone.retrofitcall;
 
 import com.rxzone.Activities.Fragments.AllPostFragment.AllPostData;
 import com.rxzone.Activities.LoginActivity.LoginData;
+import com.rxzone.model.CommonDropDownData;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,11 @@ public interface ApiInterface {
 
     @GET
     Call<ArrayList<AllPostData>> getAllPostsReq(@Url String url);
+
+
+    //
+    @POST()
+    Call<ArrayList<CommonDropDownData>> shippingDropDownReq(@Url String url);
 
 
 }
