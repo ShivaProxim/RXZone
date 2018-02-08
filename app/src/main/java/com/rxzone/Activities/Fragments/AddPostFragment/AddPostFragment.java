@@ -80,7 +80,7 @@ public class AddPostFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.add_post_activity, container, false);
+        view = inflater.inflate(R.layout.add_post_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         ((HomeActivity) getActivity()).changeToolBarText("Add Post");
         setHasOptionsMenu(true);
@@ -107,7 +107,17 @@ public class AddPostFragment extends Fragment {
                                    Response<ArrayList<CommonDropDownData>> response) {
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
-                dataAddingToAdapter(response.body(), spinnerPositionNolocal);
+                if (spinnerPositionNolocal == 1) {
+                    packageQtyAdapter(response.body(), spinnerPositionNolocal);
+                } else if (spinnerPositionNolocal == 2) {
+                    prductOptAdapter(response.body(), spinnerPositionNolocal);
+                } else if (spinnerPositionNolocal == 3) {
+                    packConAdapter(response.body(), spinnerPositionNolocal);
+                } else if (spinnerPositionNolocal == 4) {
+                    groundAdapter(response.body(), spinnerPositionNolocal);
+                } else if (spinnerPositionNolocal == 5) {
+                    shippingAdapter(response.body(), spinnerPositionNolocal);
+                }
             }
 
             @Override
@@ -120,26 +130,114 @@ public class AddPostFragment extends Fragment {
     }
 
     //Spinner number given based on design top to bottom
-    private void dataAddingToAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
+    private void prductOptAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
+        try {
+            _prductOptData.clear();
+            prductOptTitles.clear();
+            _prductOptData = new ArrayList<CommonDropDownData>();
+            for (int i = 0; i < dropDownArrayData.size(); i++) {
+                String id = dropDownArrayData.get(i).get_id();
+                String title = dropDownArrayData.get(i).getName();
+                _prductOptData.add(new CommonDropDownData(id, title));
+            }
+            prductOptTitles.add("Select");
+            if (_prductOptData.size() > 0) {
+                for (int i = 0; i < _prductOptData.size(); i++) {
+                    prductOptTitles.add(_prductOptData.get(i).getName());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        adapterDataAssigingToSpinner(prductOptTitles, spinnernumber);
+    }
+
+    private void packageQtyAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
         try {
             _packageQtyData.clear();
-            commmonForAllTitles.clear();
+            packageQtyTitles.clear();
             _packageQtyData = new ArrayList<CommonDropDownData>();
             for (int i = 0; i < dropDownArrayData.size(); i++) {
                 String id = dropDownArrayData.get(i).get_id();
                 String title = dropDownArrayData.get(i).getName();
                 _packageQtyData.add(new CommonDropDownData(id, title));
             }
-            commmonForAllTitles.add("Select");
+            packageQtyTitles.add("Select");
             if (_packageQtyData.size() > 0) {
                 for (int i = 0; i < _packageQtyData.size(); i++) {
-                    commmonForAllTitles.add(_packageQtyData.get(i).getName());
+                    packageQtyTitles.add(_packageQtyData.get(i).getName());
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        adapterDataAssigingToSpinner(commmonForAllTitles, spinnernumber);
+        adapterDataAssigingToSpinner(packageQtyTitles, spinnernumber);
+    }
+
+    private void packConAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
+        try {
+            _packConData.clear();
+            packConTitles.clear();
+            _packConData = new ArrayList<CommonDropDownData>();
+            for (int i = 0; i < dropDownArrayData.size(); i++) {
+                String id = dropDownArrayData.get(i).get_id();
+                String title = dropDownArrayData.get(i).getName();
+                _packConData.add(new CommonDropDownData(id, title));
+            }
+            packConTitles.add("Select");
+            if (_packConData.size() > 0) {
+                for (int i = 0; i < _packConData.size(); i++) {
+                    packConTitles.add(_packConData.get(i).getName());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        adapterDataAssigingToSpinner(packConTitles, spinnernumber);
+    }
+
+    private void groundAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
+        try {
+            _groundData.clear();
+            groundTitles.clear();
+            _groundData = new ArrayList<CommonDropDownData>();
+            for (int i = 0; i < dropDownArrayData.size(); i++) {
+                String id = dropDownArrayData.get(i).get_id();
+                String title = dropDownArrayData.get(i).getName();
+                _groundData.add(new CommonDropDownData(id, title));
+            }
+            groundTitles.add("Select");
+            if (_groundData.size() > 0) {
+                for (int i = 0; i < _groundData.size(); i++) {
+                    groundTitles.add(_groundData.get(i).getName());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        adapterDataAssigingToSpinner(groundTitles, spinnernumber);
+    }
+
+    private void shippingAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
+        try {
+            _shippingData.clear();
+            shippingTitles.clear();
+            _shippingData = new ArrayList<CommonDropDownData>();
+            for (int i = 0; i < dropDownArrayData.size(); i++) {
+                String id = dropDownArrayData.get(i).get_id();
+                String title = dropDownArrayData.get(i).getName();
+                _shippingData.add(new CommonDropDownData(id, title));
+            }
+            shippingTitles.add("Select");
+            if (_shippingData.size() > 0) {
+                for (int i = 0; i < _shippingData.size(); i++) {
+                    shippingTitles.add(_shippingData.get(i).getName());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        adapterDataAssigingToSpinner(shippingTitles, spinnernumber);
     }
 
     private void initializeViews() {
@@ -154,9 +252,6 @@ public class AddPostFragment extends Fragment {
 
     }
 
-    private void initializeRest(List<AllPostData> allPostdata) {
-
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
@@ -184,21 +279,29 @@ public class AddPostFragment extends Fragment {
 
 
     private void adapterDataAssigingToSpinner(ArrayList<String> spinnerTitles, int spinnerSelction) {
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, spinnerTitles);
-        dataAdapter.setDropDownViewResource(R.layout.list_item);
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, spinnerTitles);
+//        dataAdapter.setDropDownViewResource(R.layout.list_item);
         if (spinnerSelction == 1) {
-            ArrayAdapter<String> zonedataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, spinnerTitles);
+            packageQtyTitles = spinnerTitles;
+            ArrayAdapter<String> zonedataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, packageQtyTitles);
             zonedataAdapter.setDropDownViewResource(R.layout.list_item);
             packquatyspn.setAdapter(zonedataAdapter);
         } else if (spinnerSelction == 2) {
-            ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, spinnerTitles);
+            prductOptTitles = spinnerTitles;
+            ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, prductOptTitles);
             routeAdapter.setDropDownViewResource(R.layout.list_item);
             prductOpt.setAdapter(routeAdapter);
         } else if (spinnerSelction == 3) {
+            packConTitles = spinnerTitles;
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, packConTitles);
             packConspn.setAdapter(dataAdapter);
         } else if (spinnerSelction == 4) {
+            groundTitles = spinnerTitles;
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, groundTitles);
             groundspn.setAdapter(dataAdapter);
         } else if (spinnerSelction == 5) {
+            shippingTitles = spinnerTitles;
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, shippingTitles);
             shippingspn.setAdapter(dataAdapter);
         }
 
