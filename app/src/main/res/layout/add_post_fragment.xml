@@ -94,8 +94,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/expiration"
-                        android:singleLine="true"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
 
@@ -105,29 +105,30 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="@dimen/ten"
                     android:layout_weight="1">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/packquatytxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/packquaty"
-                        android:textSize="@dimen/thirteen" />
+                        <TextView
+                            android:id="@+id/packquatytxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/packquaty"
+                            android:textSize="@dimen/thirteen" />
 
-                    <Spinner
-                        android:id="@+id/packquatyspn"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:drawSelectorOnTop="true" />
+                        <Spinner
+                            android:id="@+id/packquatyspn"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:drawSelectorOnTop="true" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.8dp"
-                        android:layout_below="@id/packquatyspn"
-                        android:background="@color/black" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.8dp"
+                            android:layout_below="@id/packquatyspn"
+                            android:background="@color/black" />
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -161,8 +162,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="@dimen/ten"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/priceopttxt"
@@ -260,9 +261,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:orientation="vertical"
                     android:layout_marginTop="@dimen/ten"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/packConttxt"
@@ -326,8 +327,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginBottom="@dimen/ten"
                 android:layout_marginTop="@dimen/ten"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/selecttxt"
@@ -341,9 +342,9 @@
                     android:id="@+id/shippingspn"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/ten"
                     android:layout_alignBaseline="@id/selecttxt"
                     android:layout_below="@id/selecttxt"
+                    android:layout_marginTop="@dimen/ten"
                     android:drawSelectorOnTop="true" />
 
                 <View
@@ -359,7 +360,7 @@
 
     <LinearLayout
         android:id="@+id/bottomview"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/ten"
@@ -373,6 +374,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/submit_rectangle"
+            android:drawableLeft="@drawable/ic_refreshh"
+            android:paddingLeft="25dp"
             android:text="@string/reset"
             android:textAllCaps="false"
             android:textColor="@color/white" />
@@ -383,6 +386,7 @@
             android:layout_marginLeft="@dimen/five"
             android:layout_weight="1"
             android:background="@drawable/submit_rectangle"
+            android:drawableLeft="@drawable/ic_checkmark"
             android:text="@string/submittitle"
             android:textAllCaps="false"
             android:textColor="@color/white" />
@@ -391,15 +395,15 @@
 
     <com.leo.simplearcloader.SimpleArcLoader
         android:id="@+id/arc_loader"
-        custom:arc_colors="@color/colorPrimaryDark"
-        custom:arc_margin="3dp"
-        custom:arc_speed="medium"
-        custom:arc_style="simple_arc"
-        custom:arc_thickness="3dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        custom:arc_colors="@color/colorPrimaryDark"
+        custom:arc_margin="3dp"
+        custom:arc_speed="medium"
+        custom:arc_style="simple_arc"
+        custom:arc_thickness="3dp" />
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 package com.rxzone.retrofitcall;
 
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostData;
-import com.rxzone.Activities.LoginActivity.LoginData;
+import com.rxzone.HomeActivity.AllPostFragment.AllPostData;
+import com.rxzone.HomeActivity.LoginActivity.LoginData;
 import com.rxzone.model.CommonDropDownData;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.rxzone.Activities.Fragments.AllPostFragment;
+package com.rxzone.HomeActivity.AllPostFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

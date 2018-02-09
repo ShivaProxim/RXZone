@@ -1,4 +1,4 @@
-package com.rxzone.Activities.Fragments.AllPostFragment;
+package com.rxzone.HomeActivity.AllPostFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;

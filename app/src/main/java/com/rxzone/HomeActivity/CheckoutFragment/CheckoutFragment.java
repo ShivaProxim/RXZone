@@ -1,4 +1,4 @@
-package com.rxzone.Activities.Fragments.CheckoutFragment;
+package com.rxzone.HomeActivity.CheckoutFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.leo.simplearcloader.SimpleArcLoader;
-import com.rxzone.Activities.DashBoardActivity.HomeActivity;
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostAdapter;
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostData;
+import com.rxzone.HomeActivity.HomeActivity;
+import com.rxzone.HomeActivity.AllPostFragment.AllPostAdapter;
+import com.rxzone.HomeActivity.AllPostFragment.AllPostData;
 import com.rxzone.retrofitcall.ApiClient;
 import com.rxzone.retrofitcall.ApiInterface;
 import com.rxzone.rxzone.R;

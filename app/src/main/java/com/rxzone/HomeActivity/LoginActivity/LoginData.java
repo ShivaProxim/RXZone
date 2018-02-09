@@ -1,4 +1,4 @@
-package com.rxzone.Activities.LoginActivity;
+package com.rxzone.HomeActivity.LoginActivity;
 
 import com.google.gson.annotations.SerializedName;
 

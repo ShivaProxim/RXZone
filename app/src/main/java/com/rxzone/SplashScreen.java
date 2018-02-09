@@ -1,4 +1,4 @@
-package com.rxzone.Activities;
+package com.rxzone;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.rxzone.Activities.DashBoardActivity.HomeActivity;
-import com.rxzone.Activities.LoginActivity.LoginActivity;
+import com.rxzone.HomeActivity.HomeActivity;
+import com.rxzone.HomeActivity.LoginActivity.LoginActivity;
 import com.rxzone.Util.SharedPrefsUtil;
 import com.rxzone.rxzone.R;
 

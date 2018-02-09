@@ -1,11 +1,10 @@
-package com.rxzone.Activities.Fragments.AddPostFragment;
+package com.rxzone.HomeActivity.AddPostFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,18 +18,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.leo.simplearcloader.SimpleArcLoader;
-import com.rxzone.Activities.DashBoardActivity.HomeActivity;
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostAdapter;
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostData;
+import com.rxzone.HomeActivity.HomeActivity;
+import com.rxzone.HomeActivity.AllPostFragment.AllPostAdapter;
+import com.rxzone.HomeActivity.AllPostFragment.AllPostData;
 import com.rxzone.model.CommonDropDownData;
 import com.rxzone.retrofitcall.ApiClient;
 import com.rxzone.retrofitcall.ApiInterface;
 import com.rxzone.rxzone.R;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

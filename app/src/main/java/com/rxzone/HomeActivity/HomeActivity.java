@@ -1,4 +1,4 @@
-package com.rxzone.Activities.DashBoardActivity;
+package com.rxzone.HomeActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,11 +19,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rxzone.Activities.DashBoardActivity.Fragments.MoviesFragment;
-import com.rxzone.Activities.Fragments.AddPostFragment.AddPostFragment;
-import com.rxzone.Activities.Fragments.AllPostFragment.AllPostLandingFragment;
-import com.rxzone.Activities.Fragments.CheckoutFragment.CheckoutFragment;
-import com.rxzone.Activities.LoginActivity.LoginActivity;
+import com.rxzone.HomeActivity.AddPostFragment.AddPostFragment;
+import com.rxzone.HomeActivity.AllPostFragment.AllPostLandingFragment;
+import com.rxzone.HomeActivity.CheckoutFragment.CheckoutFragment;
+import com.rxzone.HomeActivity.LoginActivity.LoginActivity;
 import com.rxzone.Util.SharedPrefsUtil;
 import com.rxzone.rxzone.R;
 

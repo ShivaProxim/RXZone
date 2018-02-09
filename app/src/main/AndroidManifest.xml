@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.rxzone.Activities.SplashScreen"
+            android:name="com.rxzone.SplashScreen"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,19 +23,19 @@
         </activity>
 
         <activity
-            android:name="com.rxzone.Activities.DashBoardActivity.HomeActivity"
+            android:name="com.rxzone.HomeActivity.HomeActivity"
             android:theme="@style/MyMaterialTheme.BaseWhite"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.rxzone.Activities.LoginActivity.LoginActivity"
+            android:name="com.rxzone.HomeActivity.LoginActivity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.rxzone.Activities.ForgotPasswordActivity.ForgotPasswordActivity"
+            android:name="com.rxzone.HomeActivity.ForgotPasswordActivity.ForgotPasswordActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.rxzone.Activities.AddPostActivity.AddPostActivity"
+            android:name="com.rxzone.HomeActivity.AddPostActivity.AddPostActivity"
             android:windowSoftInputMode="stateHidden" />
 
     </application>
