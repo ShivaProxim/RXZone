@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,6 +69,10 @@ public class HomeActivity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 //        navHeader = navigationView.getHeaderView(0);
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
+
+        if(SharedPrefsUtil.getStringPreference(getApplicationContext(), "TOKEN_ID") != null){
+            Log.e("TokenId", SharedPrefsUtil.getStringPreference(getApplicationContext(), "TOKEN_ID") + "");
+        }
 
         setUpNavigationView();
         if (savedInstanceState == null) {

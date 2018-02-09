@@ -1,9 +1,14 @@
 package com.rxzone.HomeActivity.AddPostFragment;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,19 +19,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leo.simplearcloader.SimpleArcLoader;
 import com.rxzone.HomeActivity.HomeActivity;
 import com.rxzone.HomeActivity.AllPostFragment.AllPostAdapter;
 import com.rxzone.HomeActivity.AllPostFragment.AllPostData;
+import com.rxzone.Util.DatePickerFragmentDailoge;
+import com.rxzone.Util.SharedPrefsUtil;
 import com.rxzone.model.CommonDropDownData;
 import com.rxzone.retrofitcall.ApiClient;
 import com.rxzone.retrofitcall.ApiInterface;
 import com.rxzone.rxzone.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +50,7 @@ import retrofit2.Response;
  * Created by PROXIM on 2/7/2018.
  */
 
-public class AddPostFragment extends Fragment {
+public class AddPostFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView common_recyclerview_recycler;
     FragmentManager fragmentManager;
@@ -71,7 +85,10 @@ public class AddPostFragment extends Fragment {
     ArrayList<CommonDropDownData> _shippingData = new ArrayList<CommonDropDownData>();
     String shippingSelectedId = "";
 
-    int spinnerPositionNo = 0;
+    TextView expirationdatetxt;
+
+    EditText ndcnoEt, lotnoEt, packageavailEt, wacpriceEt, wacdiscountEt, packpriceEt;
+    Button resetBtn, submitBtn;
 
     @Nullable
     @Override
@@ -81,6 +98,8 @@ public class AddPostFragment extends Fragment {
         ((HomeActivity) getActivity()).changeToolBarText("Add Post");
         setHasOptionsMenu(true);
         initializeViews();
+        initializeActions();
+
 
         retrofitInit(1, ApiClient.SHIPING_METHOD_DROP_DATA_URL);
         retrofitInit(2, ApiClient.SHIPING_METHOD_DROP_DATA_URL);
@@ -91,6 +110,88 @@ public class AddPostFragment extends Fragment {
 
         return view;
     }
+
+    private void initializeActions() {
+        expirationdatetxt.setOnClickListener(this);
+        resetBtn.setOnClickListener(this);
+        submitBtn.setOnClickListener(this);
+    }
+
+    private void initializeViews() {
+        fragmentManager = getActivity().getSupportFragmentManager();
+        mDialog = (SimpleArcLoader) view.findViewById(R.id.arc_loader);
+
+        packquatyspn = (Spinner) view.findViewById(R.id.packquatyspn);
+        prductOpt = (Spinner) view.findViewById(R.id.prductOpt);
+        packConspn = (Spinner) view.findViewById(R.id.packConspn);
+        groundspn = (Spinner) view.findViewById(R.id.groundspn);
+        shippingspn = (Spinner) view.findViewById(R.id.shippingspn);
+
+        expirationdatetxt = (TextView) view.findViewById(R.id.expirationdatetxt);
+
+        ndcnoEt = (EditText) view.findViewById(R.id.ndcnoEt);
+        lotnoEt = (EditText) view.findViewById(R.id.lotnoEt);
+        packageavailEt = (EditText) view.findViewById(R.id.packageavailEt);
+        wacpriceEt = (EditText) view.findViewById(R.id.wacpriceEt);
+        wacdiscountEt = (EditText) view.findViewById(R.id.wacdiscountEt);
+        packpriceEt = (EditText) view.findViewById(R.id.packpriceEt);
+
+        resetBtn = (Button) view.findViewById(R.id.resetBtn);
+        submitBtn = (Button) view.findViewById(R.id.submitBtn);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        menuInflater.inflate(R.menu.main, menu);
+        super.onCreateOptionsMenu(menu, menuInflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void adapterDataAssigingToSpinner(ArrayList<String> spinnerTitles, int spinnerSelction) {
+        if (spinnerSelction == 1) {
+            packageQtyTitles = spinnerTitles;
+            ArrayAdapter<String> zonedataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, packageQtyTitles);
+            zonedataAdapter.setDropDownViewResource(R.layout.list_item);
+            packquatyspn.setAdapter(zonedataAdapter);
+        } else if (spinnerSelction == 2) {
+            prductOptTitles = spinnerTitles;
+            ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, prductOptTitles);
+            routeAdapter.setDropDownViewResource(R.layout.list_item);
+            prductOpt.setAdapter(routeAdapter);
+        } else if (spinnerSelction == 3) {
+            packConTitles = spinnerTitles;
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, packConTitles);
+            packConspn.setAdapter(dataAdapter);
+        } else if (spinnerSelction == 4) {
+            groundTitles = spinnerTitles;
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, groundTitles);
+            groundspn.setAdapter(dataAdapter);
+        } else if (spinnerSelction == 5) {
+            shippingTitles = spinnerTitles;
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, shippingTitles);
+            shippingspn.setAdapter(dataAdapter);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.expirationdatetxt) {
+            DialogFragment newFragment = new DatePickerFragmentDailoge(fragmentManager, expirationdatetxt);
+            newFragment.show(getFragmentManager(), "datePicker");
+        } else if (v.getId() == R.id.resetBtn) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(this).attach(this).commit();
+        } else if (v.getId() == R.id.submitBtn) {
+            Toast.makeText(getContext(), "submitted", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
 
     private void retrofitInit(final int spinnerPositionNolocal, final String CALL_URL) {
         mDialog.setVisibility(View.VISIBLE);
@@ -125,7 +226,9 @@ public class AddPostFragment extends Fragment {
         });
     }
 
+
     //Spinner number given based on design top to bottom
+    //Product Option Spinner
     private void prductOptAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
         try {
             _prductOptData.clear();
@@ -148,6 +251,7 @@ public class AddPostFragment extends Fragment {
         adapterDataAssigingToSpinner(prductOptTitles, spinnernumber);
     }
 
+    //Product Quantity Spinner
     private void packageQtyAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
         try {
             _packageQtyData.clear();
@@ -234,73 +338,5 @@ public class AddPostFragment extends Fragment {
             e.printStackTrace();
         }
         adapterDataAssigingToSpinner(shippingTitles, spinnernumber);
-    }
-
-    private void initializeViews() {
-        fragmentManager = getActivity().getSupportFragmentManager();
-        mDialog = (SimpleArcLoader) view.findViewById(R.id.arc_loader);
-
-        packquatyspn = (Spinner) view.findViewById(R.id.packquatyspn);
-        prductOpt = (Spinner) view.findViewById(R.id.prductOpt);
-        packConspn = (Spinner) view.findViewById(R.id.packConspn);
-        groundspn = (Spinner) view.findViewById(R.id.groundspn);
-        shippingspn = (Spinner) view.findViewById(R.id.shippingspn);
-
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
-        menuInflater.inflate(R.menu.main, menu);
-        super.onCreateOptionsMenu(menu, menuInflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-//        return super.onOptionsItemSelected(item);
-      /*  switch (item.getItemId()) {
-            *//*case R.id.wishList:
-                // TODO put your code here to respond to the button tap
-                Toast.makeText(getActivity(), "WishList", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.checkout:
-                // TODO put your code here to respond to the button tap
-                Toast.makeText(getActivity(), "CheckOut", Toast.LENGTH_SHORT).show();
-                return true;*//*
-            default:
-                return */
-        return super.onOptionsItemSelected(item);
-
-    }
-
-
-    private void adapterDataAssigingToSpinner(ArrayList<String> spinnerTitles, int spinnerSelction) {
-//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, spinnerTitles);
-//        dataAdapter.setDropDownViewResource(R.layout.list_item);
-        if (spinnerSelction == 1) {
-            packageQtyTitles = spinnerTitles;
-            ArrayAdapter<String> zonedataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, packageQtyTitles);
-            zonedataAdapter.setDropDownViewResource(R.layout.list_item);
-            packquatyspn.setAdapter(zonedataAdapter);
-        } else if (spinnerSelction == 2) {
-            prductOptTitles = spinnerTitles;
-            ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, prductOptTitles);
-            routeAdapter.setDropDownViewResource(R.layout.list_item);
-            prductOpt.setAdapter(routeAdapter);
-        } else if (spinnerSelction == 3) {
-            packConTitles = spinnerTitles;
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, packConTitles);
-            packConspn.setAdapter(dataAdapter);
-        } else if (spinnerSelction == 4) {
-            groundTitles = spinnerTitles;
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, groundTitles);
-            groundspn.setAdapter(dataAdapter);
-        } else if (spinnerSelction == 5) {
-            shippingTitles = spinnerTitles;
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, shippingTitles);
-            shippingspn.setAdapter(dataAdapter);
-        }
-
-
     }
 }
