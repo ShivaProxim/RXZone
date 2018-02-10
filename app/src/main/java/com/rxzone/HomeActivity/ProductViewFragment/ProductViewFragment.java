@@ -1,5 +1,6 @@
 package com.rxzone.HomeActivity.ProductViewFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -33,6 +34,7 @@ import com.rxzone.HomeActivity.AddPostFragment.AddProductData;
 import com.rxzone.HomeActivity.AllPostFragment.AllPostAdapter;
 import com.rxzone.HomeActivity.AllPostFragment.AllPostData;
 import com.rxzone.HomeActivity.HomeActivity;
+import com.rxzone.HomeActivity.OrderSummaryActivity.OrderSummeryActivity;
 import com.rxzone.Util.Common;
 import com.rxzone.Util.DatePickerFragmentDailoge;
 import com.rxzone.Util.SharedPrefsUtil;
@@ -156,6 +158,8 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 //            ft.detach(this).attach(this).commit();
             transactFragment(this, true);
         } else if (v.getId() == R.id.proceedBtn) {
+            Intent i = new Intent(getContext(), OrderSummeryActivity.class);
+            startActivity(i);
 //            boolean ValidatedSuccess = ValidatingAllFields();
 
            /* if (ValidatedSuccess) {

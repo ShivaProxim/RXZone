@@ -3,7 +3,8 @@
     package="com.rxzone.rxzone">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -35,7 +36,8 @@
             android:name="com.rxzone.HomeActivity.ForgotPasswordActivity.ForgotPasswordActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.rxzone.HomeActivity.AddPostActivity.AddPostActivity"
+            android:name="com.rxzone.HomeActivity.OrderSummaryActivity.OrderSummeryActivity"
+            android:label="ORDER SUMMARY"
             android:windowSoftInputMode="stateHidden" />
 
     </application>

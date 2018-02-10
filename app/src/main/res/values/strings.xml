@@ -90,6 +90,28 @@
     <string name="Wac">WAC / AWP Spread</string>
     <string name="qtyavail">Qty Avl</string>
 
+    <string name="shippingaddress">SHIPPING ADDRESS</string>
+
+    <string name="currentlocation">Current Location</string>
+
+    <!--Payment Method-->
+    <string name="paymentmethod">Payments Method</string>
+    <string name="banktransfor">Bank Transfer</string>
+    <string name="internetbanking">Internet Banking</string>
+    <string name="cashondel">Cash On Delivery </string>
+    <string name="debitcard">Debit Card</string>
+    <string name="creditcard">Credit Card</string>
+
+
+    <!--SHIPPING METHOD-->
+    <string name="shippingmethod">SHIPPING METHOD</string>
+    <string name="airplan">Airplane</string>
+    <string name="transport">Transport</string>
+    <string name="train">Train</string>
+
+    <string name="proccedtopay">Procced to pay</string>
+
+
 
 
 </resources>
