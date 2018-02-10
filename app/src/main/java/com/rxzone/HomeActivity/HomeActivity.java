@@ -67,6 +67,9 @@ public class HomeActivity extends AppCompatActivity {
         mHandler = new Handler();
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+
+
 //        navHeader = navigationView.getHeaderView(0);
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 

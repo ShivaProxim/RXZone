@@ -30,6 +30,9 @@ public class ApiClient {
     public static final String PACKAGE_CON_DROP_DATA_URL = BASE_URL + "getPackageConditions/";
     public static final String GROUND_SHIPPING_DROP_DATA_URL = BASE_URL + "getGroundShipping/";
 
+    public static final String SAVE_PRODUCT_DETAILS_URL = BASE_URL + "saveProductDetails/";
+    //
+
     //
 
 //    public static final String ELASTIC_URL = "http://apiservice-ec.flikster.com/";

@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -30,6 +31,8 @@ import com.leo.simplearcloader.SimpleArcLoader;
 import com.rxzone.HomeActivity.HomeActivity;
 import com.rxzone.HomeActivity.AllPostFragment.AllPostAdapter;
 import com.rxzone.HomeActivity.AllPostFragment.AllPostData;
+import com.rxzone.HomeActivity.LoginActivity.LoginData;
+import com.rxzone.Util.Common;
 import com.rxzone.Util.DatePickerFragmentDailoge;
 import com.rxzone.Util.SharedPrefsUtil;
 import com.rxzone.model.CommonDropDownData;
@@ -42,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,7 +54,7 @@ import retrofit2.Response;
  * Created by PROXIM on 2/7/2018.
  */
 
-public class AddPostFragment extends Fragment implements View.OnClickListener {
+public class AddPostFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     View view;
     RecyclerView common_recyclerview_recycler;
     FragmentManager fragmentManager;
@@ -89,6 +93,16 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
 
     EditText ndcnoEt, lotnoEt, packageavailEt, wacpriceEt, wacdiscountEt, packpriceEt;
     Button resetBtn, submitBtn;
+
+
+    String gsdbRefID = "", ndcNum = "", lotNum = "", expDate = "", packageQuantity = "", pkgAvailable = "",
+            priceOption = "", packPrice = "", wacDsicount = "", imagePath = "", strength = "", packagee = "",
+            formcp = "", lastRefDate = "", packageConditionVal = "", otherPackageConditionText = "",
+            groundShippingVal = "", shippingMethodVal = "", productID = "",
+            gsddProductID = "",
+            packageName = "", mfgName = "", wacPrice = "", partialQunatity = "";
+    Boolean tornPharmacyLabel;
+    Boolean otherPackageCondition;
 
     @Nullable
     @Override
@@ -184,12 +198,61 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
             DialogFragment newFragment = new DatePickerFragmentDailoge(fragmentManager, expirationdatetxt);
             newFragment.show(getFragmentManager(), "datePicker");
         } else if (v.getId() == R.id.resetBtn) {
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.detach(this).attach(this).commit();
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.detach(this).attach(this).commit();
+            transactFragment(this, true);
         } else if (v.getId() == R.id.submitBtn) {
-            Toast.makeText(getContext(), "submitted", Toast.LENGTH_SHORT).show();
+            boolean ValidatedSuccess = ValidatingAllFields();
+
+            if (ValidatedSuccess) {
+                submitDataServerwithretrofit();
+                Toast.makeText(getContext(), "submitted", Toast.LENGTH_SHORT).show();
+            }
+
 
         }
+    }
+
+    public void transactFragment(Fragment fragment, boolean reload) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        if (reload) {
+            getFragmentManager().popBackStack();
+        }
+        transaction.replace(R.id.frame, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private boolean ValidatingAllFields() {
+        boolean noEntry = true;
+        ndcNum = ndcnoEt.getText().toString();
+        lotNum = lotnoEt.getText().toString();
+        pkgAvailable = packageavailEt.getText().toString();
+        wacPrice = wacpriceEt.getText().toString();
+        wacDsicount = wacdiscountEt.getText().toString();
+        packPrice = packpriceEt.getText().toString();
+        expDate = expirationdatetxt.getText().toString();
+
+        if (ndcNum.length() == 0) {
+            return noEntry = Common.editTextErrorCall(getContext(), "Please enter NDC Number", ndcnoEt);
+        } else if (lotNum.length() == 0) {
+            return noEntry = Common.editTextErrorCall(getContext(), "Please enter LOT Number", lotnoEt);
+            //if (expDate.equals("Expiration Date")){}
+        } else if (expDate.length() == 0) {
+            return noEntry = Common.toastMessage(getContext(), "Please select Expiration date");
+        } else if (expDate.equals("Expiration Date")) {
+            return Common.toastMessage(getContext(), "Please select Expiration date");
+        } else if (pkgAvailable.length() == 0) {
+            return noEntry = Common.editTextErrorCall(getContext(), "Please enter Package Available", packageavailEt);
+        } else if (wacPrice.length() == 0) {
+            return noEntry = Common.editTextErrorCall(getContext(), "Please enter WAC Price", wacpriceEt);
+        } else if (wacDsicount.length() == 0) {
+            return noEntry = Common.editTextErrorCall(getContext(), "PLease enter WAC Discount", wacdiscountEt);
+        } else if (packPrice.length() == 0) {
+            return noEntry = Common.editTextErrorCall(getContext(), "Please enter Pack Price", packpriceEt);
+        }
+        return noEntry;
     }
 
 
@@ -219,6 +282,54 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<ArrayList<CommonDropDownData>> call, Throwable t) {
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
+
+    private void submitDataServerwithretrofit() {
+        AddProductData addProductData = new AddProductData(gsdbRefID, ndcNum,
+                lotNum, expDate, packageQuantity, pkgAvailable, priceOption,
+                packPrice, wacDsicount, imagePath, strength, packagee, formcp, lastRefDate,
+                packageConditionVal, tornPharmacyLabel, otherPackageCondition, otherPackageConditionText,
+                groundShippingVal, shippingMethodVal, productID, gsddProductID, packageName,
+                mfgName, wacPrice, partialQunatity);
+
+
+
+        mDialog.setVisibility(View.VISIBLE);
+        mDialog.start();
+//        apiInterface = ApiClient.getClientData().create(ApiInterface.class);
+//        Call<ArrayList<CommonDropDownData>> call = apiInterface.submitPostReq(CALL_URL);
+
+        apiInterface = ApiClient.getClient(ApiClient.SAVE_PRODUCT_DETAILS_URL).create(ApiInterface.class);
+        Call<AddProductData> call = apiInterface.submitPostReq(SharedPrefsUtil.getStringPreference(getContext(), "TOKEN_ID"), addProductData);
+
+        call.enqueue(new Callback<AddProductData>() {
+            @Override
+            public void onResponse(Call<AddProductData> call,
+                                   Response<AddProductData> response) {
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
+                String message = response.body().getMessage();
+                if (message!=null&& !message.isEmpty()){
+                    if (message.equals("success")) {
+                        Common.toastMessage(getContext(), "Product Data Submitted Successfully");
+                    } else {
+                        Common.toastMessage(getContext(), "Failed to submit");
+                    }
+                }else {
+                    Common.toastMessage(getContext(), "Null Data From server");
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<AddProductData> call, Throwable t) {
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
                 Log.e("vvvvvvvvvv", "vv" + call + t);
@@ -338,5 +449,61 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
         adapterDataAssigingToSpinner(shippingTitles, spinnernumber);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String selectedSpinner = "";
+        switch (parent.getId()) {
+            case R.id.packquatyspn:
+                dropDownValueSelection(position, _packageQtyData, 1);
+                break;
+            case R.id.prductOpt:
+                dropDownValueSelection(position, _prductOptData, 2);
+                break;
+            case R.id.packConspn:
+                dropDownValueSelection(position, _packConData, 3);
+                break;
+            case R.id.groundspn:
+                dropDownValueSelection(position, _groundData, 4);
+                break;
+            case R.id.shippingspn:
+                dropDownValueSelection(position, _shippingData, 5);
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    private void dropDownValueSelection(int position, ArrayList<CommonDropDownData> _dropDownData, int selectedSpinner) {
+        try {
+            if (position != 0) {
+                if (_dropDownData.size() != 0) {
+                    if (selectedSpinner == 1) {
+                        packageQuantity = _dropDownData.get(position - 1).get_id();
+                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
+                    } else if (selectedSpinner == 2) {
+                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
+                        priceOption = _dropDownData.get(position - 1).get_id(); //3
+                    } else if (selectedSpinner == 3) {
+                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
+                        packageConditionVal = _dropDownData.get(position - 1).get_id();
+                    } else if (selectedSpinner == 4) {
+                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
+                        groundShippingVal = _dropDownData.get(position - 1).get_id();
+                    } else if (selectedSpinner == 5) {
+                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
+                        shippingMethodVal = _dropDownData.get(position - 1).get_id();
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+        }
+
+
     }
 }
