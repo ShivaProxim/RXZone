@@ -54,6 +54,18 @@
         <item>Settings</item>
     </string-array>
 
+    <string-array name="productsubinfoarray">
+        <item>NDC / PROC ID</item>
+        <item>Pack Size</item>
+        <item>Dosage Form</item>
+        <item>Exp Date(Days)</item>
+        <item>Supplier</item>
+        <item>WAC/AWP Spread</item>
+        <item>Qty Avl</item>
+    </string-array>
+
+
+
 
     <string name="supplierbill">Supplier Bill</string>
 

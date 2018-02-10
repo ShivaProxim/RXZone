@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,7 +52,7 @@ import retrofit2.Response;
  * Created by PROXIM on 2/7/2018.
  */
 
-public class ProductViewFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class ProductViewFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView common_recyclerview_recycler;
     FragmentManager fragmentManager;
@@ -58,36 +60,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
     SimpleArcLoader mDialog;
     ApiInterface apiInterface;
     RecyclerView.LayoutManager ratingNowShowingLayoutManager;
-    AllPostAdapter allPostAdapter;
-    ArrayList<AllPostData> _allPostData;
-    Spinner packquatyspn, prductOpt, packConspn, groundspn, shippingspn;
-
-
-    ArrayList<String> commmonForAllTitles = new ArrayList<String>();
-
-    ArrayList<String> packageQtyTitles = new ArrayList<String>();
-    ArrayList<CommonDropDownData> _packageQtyData = new ArrayList<CommonDropDownData>();
-    String packageQtySelectedId = "";
-
-    ArrayList<String> prductOptTitles = new ArrayList<String>();
-    ArrayList<CommonDropDownData> _prductOptData = new ArrayList<CommonDropDownData>();
-    String prductOptSelectedId = "";
-
-    ArrayList<String> packConTitles = new ArrayList<String>();
-    ArrayList<CommonDropDownData> _packConData = new ArrayList<CommonDropDownData>();
-    String packConSelectedId = "";
-
-    ArrayList<String> groundTitles = new ArrayList<String>();
-    ArrayList<CommonDropDownData> _groundData = new ArrayList<CommonDropDownData>();
-    String groundSelectedId = "";
-
-    ArrayList<String> shippingTitles = new ArrayList<String>();
-    ArrayList<CommonDropDownData> _shippingData = new ArrayList<CommonDropDownData>();
-    String shippingSelectedId = "";
-
-    TextView expirationdatetxt;
-
-    EditText ndcnoEt, lotnoEt, packageavailEt, wacpriceEt, wacdiscountEt, packpriceEt;
+    ProductSubInfoAdapter productSubInfoAdapter;
     Button resetBtn, proceedBtn;
     LinearLayout checklayout;
     ImageView decrementIv, incrementIv;
@@ -105,6 +78,7 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
     Boolean otherPackageCondition;
     int positionvalue;
     List<AllPostData> allPostData;
+    public String subInfoData[] = new String[7];
 
 
     @Nullable
@@ -113,18 +87,14 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
         view = inflater.inflate(R.layout.productview_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         ((HomeActivity) getActivity()).changeToolBarText("Product View");
-//        setHasOptionsMenu(true);
         initializeViews();
         initializeActions();
-
         return view;
     }
 
     private void initializeActions() {
         checklayout.setOnClickListener(this);
         proceedBtn.setOnClickListener(this);
-
-
         Bundle bundle = getArguments();
         positionvalue = bundle.getInt("POSITION_VALUE");
         allPostData = (List<AllPostData>) bundle.getSerializable("PRODUCT_DETAILS");
@@ -136,12 +106,22 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
         }
 
         if (allPostData.get(positionvalue).getPackageName() != null && !allPostData.get(positionvalue).getPackageName().isEmpty()) {
-            productdes.setText(Html.fromHtml("Note :" + allPostData.get(positionvalue).getPackageName()) + "");
+            productdes.setText(Html.fromHtml("Note : " + allPostData.get(positionvalue).getPackageName()) + "");
         }
 
         if (allPostData.get(positionvalue).getPackPrice() != null && !allPostData.get(positionvalue).getPackPrice().isEmpty()) {
             pricetxt.setText(Html.fromHtml("$ " + allPostData.get(positionvalue).getPackPrice()) + "");
         }
+
+        subInfoData[0] = allPostData.get(positionvalue).getNdcNum();
+        subInfoData[1] = allPostData.get(positionvalue).getNdcNum();
+        subInfoData[2] = allPostData.get(positionvalue).getPackageName();
+        subInfoData[3] = allPostData.get(positionvalue).getExpDate();
+        subInfoData[4] = allPostData.get(positionvalue).getNdcNum();
+        subInfoData[5] = allPostData.get(positionvalue).getWacPrice();
+        subInfoData[6] = allPostData.get(positionvalue).getPackageQuantity();
+        subInfoAdapter(subInfoData);
+
 
     }
 
@@ -157,13 +137,10 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
         incrementIv = (ImageView) view.findViewById(R.id.incrementIv);
         counttxt = (TextView) view.findViewById(R.id.counttxt);
         proceedBtn = (Button) view.findViewById(R.id.proceedBtn);
+
+        common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.common_recyclerview_recycler);
     }
 
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
-        menuInflater.inflate(R.menu.main, menu);
-        super.onCreateOptionsMenu(menu, menuInflater);
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -201,69 +178,14 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
         transaction.commit();
     }
 
-    /*private boolean ValidatingAllFields() {
-        boolean noEntry = true;
-        ndcNum = ndcnoEt.getText().toString();
-        lotNum = lotnoEt.getText().toString();
-        pkgAvailable = packageavailEt.getText().toString();
-        wacPrice = wacpriceEt.getText().toString();
-        wacDsicount = wacdiscountEt.getText().toString();
-        packPrice = packpriceEt.getText().toString();
-        expDate = expirationdatetxt.getText().toString();
 
-        if (ndcNum.length() == 0) {
-            return noEntry = Common.editTextErrorCall(getContext(), "Please enter NDC Number", ndcnoEt);
-        } else if (lotNum.length() == 0) {
-            return noEntry = Common.editTextErrorCall(getContext(), "Please enter LOT Number", lotnoEt);
-            //if (expDate.equals("Expiration Date")){}
-        } else if (expDate.length() == 0) {
-            return noEntry = Common.toastMessage(getContext(), "Please select Expiration date");
-        } else if (expDate.equals("Expiration Date")) {
-            return Common.toastMessage(getContext(), "Please select Expiration date");
-        } else if (pkgAvailable.length() == 0) {
-            return noEntry = Common.editTextErrorCall(getContext(), "Please enter Package Available", packageavailEt);
-        } else if (wacPrice.length() == 0) {
-            return noEntry = Common.editTextErrorCall(getContext(), "Please enter WAC Price", wacpriceEt);
-        } else if (wacDsicount.length() == 0) {
-            return noEntry = Common.editTextErrorCall(getContext(), "PLease enter WAC Discount", wacdiscountEt);
-        } else if (packPrice.length() == 0) {
-            return noEntry = Common.editTextErrorCall(getContext(), "Please enter Pack Price", packpriceEt);
-        }
-        return noEntry;
-    }*/
+    private void subInfoAdapter(String[] subInfoData) {
+        ratingNowShowingLayoutManager = new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL, false);
+        common_recyclerview_recycler.setLayoutManager(ratingNowShowingLayoutManager);
+        productSubInfoAdapter = new ProductSubInfoAdapter(getContext(), fragmentManager, subInfoData);
+        common_recyclerview_recycler.setAdapter(productSubInfoAdapter);
 
-
-    private void retrofitInit(final int spinnerPositionNolocal, final String CALL_URL) {
-        mDialog.setVisibility(View.VISIBLE);
-        mDialog.start();
-        apiInterface = ApiClient.getClientData().create(ApiInterface.class);
-        Call<ArrayList<CommonDropDownData>> call = apiInterface.shippingDropDownReq(CALL_URL);
-        call.enqueue(new Callback<ArrayList<CommonDropDownData>>() {
-            @Override
-            public void onResponse(Call<ArrayList<CommonDropDownData>> call,
-                                   Response<ArrayList<CommonDropDownData>> response) {
-                mDialog.setVisibility(View.GONE);
-                mDialog.stop();
-                if (spinnerPositionNolocal == 1) {
-                    packageQtyAdapter(response.body(), spinnerPositionNolocal);
-                } else if (spinnerPositionNolocal == 2) {
-                    prductOptAdapter(response.body(), spinnerPositionNolocal);
-                } else if (spinnerPositionNolocal == 3) {
-                    packConAdapter(response.body(), spinnerPositionNolocal);
-                } else if (spinnerPositionNolocal == 4) {
-                    groundAdapter(response.body(), spinnerPositionNolocal);
-                } else if (spinnerPositionNolocal == 5) {
-                    shippingAdapter(response.body(), spinnerPositionNolocal);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<CommonDropDownData>> call, Throwable t) {
-                mDialog.setVisibility(View.GONE);
-                mDialog.stop();
-                Log.e("vvvvvvvvvv", "vv" + call + t);
-            }
-        });
     }
 
 
@@ -278,9 +200,6 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
 
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
-//        apiInterface = ApiClient.getClientData().create(ApiInterface.class);
-//        Call<ArrayList<CommonDropDownData>> call = apiInterface.submitPostReq(CALL_URL);
-
         apiInterface = ApiClient.getClient(ApiClient.SAVE_PRODUCT_DETAILS_URL).create(ApiInterface.class);
         Call<AddProductData> call = apiInterface.submitPostReq(SharedPrefsUtil.getStringPreference(getContext(), "TOKEN_ID"), addProductData);
 
@@ -314,172 +233,4 @@ public class ProductViewFragment extends Fragment implements View.OnClickListene
     }
 
 
-    //Spinner number given based on design top to bottom
-    //Product Option Spinner
-    private void prductOptAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
-        try {
-            _prductOptData.clear();
-            prductOptTitles.clear();
-            _prductOptData = new ArrayList<CommonDropDownData>();
-            for (int i = 0; i < dropDownArrayData.size(); i++) {
-                String id = dropDownArrayData.get(i).get_id();
-                String title = dropDownArrayData.get(i).getName();
-                _prductOptData.add(new CommonDropDownData(id, title));
-            }
-            prductOptTitles.add("Select");
-            if (_prductOptData.size() > 0) {
-                for (int i = 0; i < _prductOptData.size(); i++) {
-                    prductOptTitles.add(_prductOptData.get(i).getName());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        adapterDataAssigingToSpinner(prductOptTitles, spinnernumber);
-    }
-
-    //Product Quantity Spinner
-    private void packageQtyAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
-        try {
-            _packageQtyData.clear();
-            packageQtyTitles.clear();
-            _packageQtyData = new ArrayList<CommonDropDownData>();
-            for (int i = 0; i < dropDownArrayData.size(); i++) {
-                String id = dropDownArrayData.get(i).get_id();
-                String title = dropDownArrayData.get(i).getName();
-                _packageQtyData.add(new CommonDropDownData(id, title));
-            }
-            packageQtyTitles.add("Select");
-            if (_packageQtyData.size() > 0) {
-                for (int i = 0; i < _packageQtyData.size(); i++) {
-                    packageQtyTitles.add(_packageQtyData.get(i).getName());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        adapterDataAssigingToSpinner(packageQtyTitles, spinnernumber);
-    }
-
-    private void packConAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
-        try {
-            _packConData.clear();
-            packConTitles.clear();
-            _packConData = new ArrayList<CommonDropDownData>();
-            for (int i = 0; i < dropDownArrayData.size(); i++) {
-                String id = dropDownArrayData.get(i).get_id();
-                String title = dropDownArrayData.get(i).getName();
-                _packConData.add(new CommonDropDownData(id, title));
-            }
-            packConTitles.add("Select");
-            if (_packConData.size() > 0) {
-                for (int i = 0; i < _packConData.size(); i++) {
-                    packConTitles.add(_packConData.get(i).getName());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        adapterDataAssigingToSpinner(packConTitles, spinnernumber);
-    }
-
-    private void groundAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
-        try {
-            _groundData.clear();
-            groundTitles.clear();
-            _groundData = new ArrayList<CommonDropDownData>();
-            for (int i = 0; i < dropDownArrayData.size(); i++) {
-                String id = dropDownArrayData.get(i).get_id();
-                String title = dropDownArrayData.get(i).getName();
-                _groundData.add(new CommonDropDownData(id, title));
-            }
-            groundTitles.add("Select");
-            if (_groundData.size() > 0) {
-                for (int i = 0; i < _groundData.size(); i++) {
-                    groundTitles.add(_groundData.get(i).getName());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        adapterDataAssigingToSpinner(groundTitles, spinnernumber);
-    }
-
-    private void shippingAdapter(ArrayList<CommonDropDownData> dropDownArrayData, int spinnernumber) {
-        try {
-            _shippingData.clear();
-            shippingTitles.clear();
-            _shippingData = new ArrayList<CommonDropDownData>();
-            for (int i = 0; i < dropDownArrayData.size(); i++) {
-                String id = dropDownArrayData.get(i).get_id();
-                String title = dropDownArrayData.get(i).getName();
-                _shippingData.add(new CommonDropDownData(id, title));
-            }
-            shippingTitles.add("Select");
-            if (_shippingData.size() > 0) {
-                for (int i = 0; i < _shippingData.size(); i++) {
-                    shippingTitles.add(_shippingData.get(i).getName());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        adapterDataAssigingToSpinner(shippingTitles, spinnernumber);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selectedSpinner = "";
-        switch (parent.getId()) {
-            case R.id.packquatyspn:
-                dropDownValueSelection(position, _packageQtyData, 1);
-                break;
-            case R.id.prductOpt:
-                dropDownValueSelection(position, _prductOptData, 2);
-                break;
-            case R.id.packConspn:
-                dropDownValueSelection(position, _packConData, 3);
-                break;
-            case R.id.groundspn:
-                dropDownValueSelection(position, _groundData, 4);
-                break;
-            case R.id.shippingspn:
-                dropDownValueSelection(position, _shippingData, 5);
-                break;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    private void dropDownValueSelection(int position, ArrayList<CommonDropDownData> _dropDownData, int selectedSpinner) {
-        try {
-            if (position != 0) {
-                if (_dropDownData.size() != 0) {
-                    if (selectedSpinner == 1) {
-                        packageQuantity = _dropDownData.get(position - 1).get_id();
-                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
-                    } else if (selectedSpinner == 2) {
-                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
-                        priceOption = _dropDownData.get(position - 1).get_id(); //3
-                    } else if (selectedSpinner == 3) {
-                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
-                        packageConditionVal = _dropDownData.get(position - 1).get_id();
-                    } else if (selectedSpinner == 4) {
-                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
-                        groundShippingVal = _dropDownData.get(position - 1).get_id();
-                    } else if (selectedSpinner == 5) {
-                        Common.toastMessage(getContext(), "Selected " + _dropDownData.get(position - 1).getName());
-                        shippingMethodVal = _dropDownData.get(position - 1).get_id();
-                    }
-                }
-            }
-        } catch (Exception e) {
-
-        }
-
-
-    }
 }

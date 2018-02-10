@@ -94,6 +94,7 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.ViewHold
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.addbtn) {
+                addbtn.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 addbtn.setText("Delete");
                 Toast.makeText(mContext, "Added", Toast.LENGTH_SHORT).show();
             } else {

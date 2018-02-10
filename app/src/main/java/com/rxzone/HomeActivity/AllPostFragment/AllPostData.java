@@ -18,6 +18,40 @@ public class AllPostData implements Serializable {
     @SerializedName("package")
     private String packagee;
 
+    @SerializedName("ndcNum")
+    private String ndcNum;
+
+    @SerializedName("wacPrice")
+    private String wacPrice;
+
+    @SerializedName("packageQuantity")
+    private String packageQuantity;
+
+    public String getPackageQuantity() {
+        return packageQuantity;
+    }
+
+    public void setPackageQuantity(String packageQuantity) {
+        this.packageQuantity = packageQuantity;
+    }
+    //
+
+    public String getWacPrice() {
+        return wacPrice;
+    }
+
+    public void setWacPrice(String wacPrice) {
+        this.wacPrice = wacPrice;
+    }
+
+    public String getNdcNum() {
+        return ndcNum;
+    }
+
+    public void setNdcNum(String ndcNum) {
+        this.ndcNum = ndcNum;
+    }
+
     @SerializedName("packPrice")
     private String packPrice;
 
