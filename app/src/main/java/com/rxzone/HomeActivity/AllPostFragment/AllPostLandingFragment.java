@@ -38,6 +38,7 @@ public class AllPostLandingFragment extends Fragment implements TabLayout.OnTabS
 
     private ViewPager mViewPager;
     private TabLayout tabLayout;
+    ViewPagerAdapter adapter;
 
     @Nullable
     @Override
@@ -53,13 +54,17 @@ public class AllPostLandingFragment extends Fragment implements TabLayout.OnTabS
         mViewPager = (ViewPager) view.findViewById(R.id.pager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+
         // Add Fragments to adapter one by one
-        adapter.addFragment(new AllPostListFragment(), "All Post");
-        adapter.addFragment(new AllPostListFragment(), "Top Post");
-        adapter.addFragment(new AllPostListFragment(), "Top Sale");
-        adapter.addFragment(new AllPostListFragment(), "Top MFR");
-        adapter.addFragment(new AllPostListFragment(), "Top Buyers");
+        if (adapter == null) {
+            adapter = new ViewPagerAdapter(getChildFragmentManager());
+            adapter.addFragment(new AllPostListFragment(), "All Post");
+            adapter.addFragment(new AllPostListFragment(), "Top Post");
+            adapter.addFragment(new AllPostListFragment(), "Top Sale");
+            adapter.addFragment(new AllPostListFragment(), "Top MFR");
+            adapter.addFragment(new AllPostListFragment(), "Top Buyers");
+        }
+
 
         mViewPager.setOffscreenPageLimit(3);
 

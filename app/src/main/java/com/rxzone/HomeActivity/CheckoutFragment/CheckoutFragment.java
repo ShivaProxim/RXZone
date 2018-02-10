@@ -49,7 +49,7 @@ public class CheckoutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.checkout_item, container, false);
+        view = inflater.inflate(R.layout.checkout_list, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 //        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Checkout");
 

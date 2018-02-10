@@ -1,6 +1,7 @@
 package com.rxzone.HomeActivity.AllPostFragment;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -12,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rxzone.HomeActivity.ProductViewFragment.ProductViewFragment;
 import com.rxzone.Util.DateUtil;
 import com.rxzone.rxzone.R;
 
+import java.io.Serializable;
 import java.util.List;
 
 import static android.support.v7.widget.RecyclerView.*;
@@ -28,6 +31,8 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.ViewHold
     Context context;
     FragmentManager fragmentManager;
     List<AllPostData> allPostData;
+    ProductViewFragment productViewFragment;
+    Bundle bundle;
 
     @Override
     public AllPostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,10 +58,10 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.ViewHold
         }
 
         if (allPostData.get(position).getPackagee() != null && !allPostData.get(position).getPackagee().isEmpty()) {
-            holder.postinfo.setText("Dosage : "+ Html.fromHtml(allPostData.get(position).getPackagee() + ""));
+            holder.postinfo.setText("Dosage : " + Html.fromHtml(allPostData.get(position).getPackagee() + ""));
         }
         if (allPostData.get(position).getExpDate() != null && !allPostData.get(position).getExpDate().isEmpty()) {
-            holder.postdate.setText("Exp Date(Days) : "+ DateUtil.serverSentDateChange(Html.fromHtml(allPostData.get(position).getExpDate())+ ""));
+            holder.postdate.setText("Exp Date(Days) : " + DateUtil.serverSentDateChange(Html.fromHtml(allPostData.get(position).getExpDate()) + ""));
         }
 
     }
@@ -83,12 +88,25 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.ViewHold
             counttxt = (TextView) itemView.findViewById(R.id.counttxt);
             addbtn = (Button) itemView.findViewById(R.id.addbtn);
             addbtn.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.addbtn) {
+                addbtn.setText("Delete");
                 Toast.makeText(mContext, "Added", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Product Complete Details", Toast.LENGTH_LONG).show();
+                productViewFragment = new ProductViewFragment();
+                bundle = new Bundle();
+                bundle.putInt("POSITION_VALUE", getAdapterPosition());
+                bundle.putSerializable("PRODUCT_DETAILS", (Serializable) allPostData);
+                productViewFragment.setArguments(bundle);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame, productViewFragment)
+                        .addToBackStack("")
+                        .commit();
             }
 
         }

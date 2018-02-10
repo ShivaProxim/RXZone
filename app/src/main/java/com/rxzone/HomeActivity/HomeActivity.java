@@ -252,7 +252,10 @@ public class HomeActivity extends AppCompatActivity {
             toolbarTextChange(headerdata);
         }else if (headerdata.equals("Checkout")){
             toolbarTextChange(headerdata);
-        }else {
+        }else if (headerdata.equals("Product View")){
+            toolbarTextChange(headerdata);
+        }
+        else {
             toolbarsearch.setVisibility(View.VISIBLE);
             toolbarcusttext.setVisibility(View.GONE);
         }

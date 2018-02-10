@@ -18,6 +18,17 @@ public class AllPostData implements Serializable {
     @SerializedName("package")
     private String packagee;
 
+    @SerializedName("packPrice")
+    private String packPrice;
+
+    public String getPackPrice() {
+        return packPrice;
+    }
+
+    public void setPackPrice(String packPrice) {
+        this.packPrice = packPrice;
+    }
+
     public String getPackageName() {
         return packageName;
     }

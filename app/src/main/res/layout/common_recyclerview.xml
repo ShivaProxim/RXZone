@@ -44,5 +44,5 @@
         custom:arc_margin="3dp"
         custom:arc_speed="medium"
         custom:arc_style="simple_arc"
-        custom:arc_thickness="3dp"></com.leo.simplearcloader.SimpleArcLoader>
+        custom:arc_thickness="3dp"/>
 </RelativeLayout>

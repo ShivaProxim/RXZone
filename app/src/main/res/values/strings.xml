@@ -41,6 +41,8 @@
     <string name="reset">Reset</string>
     <string name="submittitle">Submit</string>
 
+    <string name="proccedpay">Proceed to pay</string>
+
     <string name="mfdfixed">MFR : Fixed</string>
     <string name="price">Price : 180</string>
 
@@ -51,6 +53,31 @@
         <item>Notifications</item>
         <item>Settings</item>
     </string-array>
+
+
+    <string name="supplierbill">Supplier Bill</string>
+
+    <string name="itemtotal">Item Total</string>
+
+    <string name="shipping">Shipping</string>
+
+    <string name="topay">To Pay</string>
+    <string name="orderconfirm">Order Confirm</string>
+
+    <string name="amountindollor">$ 72</string>
+    <string name="amountindollordifferent">$ 144</string>
+
+    <string name="productsubinfo">#Product Sub info</string>
+
+
+    <string name="ndcprocid">NDC / PROC ID</string>
+    <string name="packsize">Pack Size</string>
+    <string name="dosageform">Dosage Form</string>
+    <string name="expdate">Exp Date (Days)</string>
+    <string name="supplier">Supplier</string>
+    <string name="Wac">WAC / AWP Spread</string>
+    <string name="qtyavail">Qty Avl</string>
+
 
 
 </resources>
